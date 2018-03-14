@@ -2,15 +2,15 @@ package LinkedList;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
- * 尾部删除结点
- * 尾部添加结点
+ * 头部删除结点
+ * 头部添加结点
  * 查找结点
  * @author Avatar
  * @param <Item>
  */
-public class LinkedList<Item> {
+
+public class LinkedList2<Item> {
     private Node first;
     private Node last;
     private int N;
@@ -22,6 +22,20 @@ public class LinkedList<Item> {
 
     public boolean isEmpty(){
         return first == null;
+    }
+
+    public void add(Item item){
+        Node oldfirst = first;
+        first = new Node();
+        first.item = item;
+        first.next = oldfirst;
+        N++;
+    }
+
+    public void delete(){
+        Node newfirst = first;
+        first = first.next;
+        N--;
     }
 
     //查找结点
@@ -36,34 +50,6 @@ public class LinkedList<Item> {
         }
         return list;
     }
-
-    //从链表尾部添加结点
-    public void add(Item item){
-        Node oldlast = last;
-        last = new Node();
-        last.item = item;
-        last.next = null;
-        if(isEmpty()){
-            first = last;
-        }else{
-            oldlast.next = last;
-        }
-        N++;
-    }
-
-    //从链表尾部删除结点
-    public void delete(){
-        Node newlast = first;
-        while (newlast != null){
-            if(newlast.next == last){
-                newlast.next = null;
-                N--;
-                break;
-            }
-            newlast = newlast.next;
-        }
-    }
-
     //输出所有结点
     public void show(){
         Node print = first;
@@ -74,20 +60,18 @@ public class LinkedList<Item> {
         System.out.println();
     }
 
-
-
     public static void main(String[] args) {
-        LinkedList linkedList = new LinkedList();
-        linkedList.add("to");
-        linkedList.add("be");
-        linkedList.add("or");
-        linkedList.add("not");
-        linkedList.add("to");
-        linkedList.add("be");
-        linkedList.add("go");
-        linkedList.delete();
-        linkedList.show();
-        List list = linkedList.search("or");
+        LinkedList2 linkedList2 = new LinkedList2();
+        linkedList2.add("to");
+        linkedList2.add("be");
+        linkedList2.add("or");
+        linkedList2.add("not");
+        linkedList2.add("to");
+        linkedList2.add("be");
+        linkedList2.add("go");
+        linkedList2.show();//从右向左读
+        linkedList2.delete();
+        List list = linkedList2.search("or");
         if(list.size() > 0 && list != null) {
             for (Object bean : list) {
                 System.out.print(bean + " ");
@@ -97,5 +81,4 @@ public class LinkedList<Item> {
         }
         System.out.println();
     }
-
 }
